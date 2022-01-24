@@ -64,12 +64,12 @@ app.get("/infoall", async function(req,res){
     }
 })
 
-app.delete("/remove/:id", async function(req,res){
+app.delete("/delete/:id", async function(req,res){
     try {
         let connection=await mongoClient.connect(URL)
         let db= connection.db("moneymanager")
-        let objId= mongodb.ObjectId(req.params.id)
-        let d= await db.collection("mentor42").deleteOne({_id:objId})
+        let ObjId= mongodb.ObjectId(req.params.id)
+         await db.collection("mentor42").deleteOne({_id:ObjId})
         await connection.close()
         res.json({message:"deleted"})
     } catch (error) {
@@ -84,7 +84,7 @@ app.post("/pending", async function(req,res){
         let db= connection.db("moneymanager")
         let b= await db.collection("mentor42").insertMany(req.body)
         await connection.close()
-        res.json({message:"list created"})
+        res.json(b)
     } catch (error) {
         console.log(error)
         
