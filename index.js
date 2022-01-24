@@ -96,7 +96,7 @@ app.get("/info/:id", async function (req, res) {
         let connection = await mongoClient.connect(URL)
         let db = connection.db("moneymanager")
         let objId = mongodb.ObjectId(req.params.id)
-        let a = await db.collection("users").findOne({ _id: objId })
+        let a = await db.collection("mentor42").findOne({ _id: objId })
         await connection.close()
         res.json(a)
     } catch (error) {
