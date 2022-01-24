@@ -50,7 +50,7 @@ app.put("/edit/:id",async function(req,res){
     }
 })
 
-app.get("/info", async function(req,res){
+app.get("/infoall", async function(req,res){
     try {
         let connection= await mongoClient.connect(URL)
         let db=connection.db("moneymanager")
@@ -90,6 +90,20 @@ app.post("/pending", async function(req,res){
         
     }
 })
+
+app.get("/info/:id", async function (req, res) {
+    try {
+        let connection = await mongoClient.connect(URL)
+        let db = connection.db("moneymanager")
+        let objId = mongodb.ObjectId(req.params.id)
+        let a = await db.collection("users").findOne({ _id: objId })
+        await connection.close()
+        res.json(a)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
 
 
 
