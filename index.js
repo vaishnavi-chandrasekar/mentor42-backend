@@ -14,7 +14,7 @@ app.post("/list", async function(req,res){
     try {
         let connection=await mongoClient.connect(URL)
         let db= connection.db("moneymanager")
-        let b = await db.collection("mentorplist").insertOne(req.body)
+        let b = await db.collection("mentorplist").insertMany(req.body)
         await connection.close()
         res.json({message:"posted"})
         
@@ -103,6 +103,20 @@ app.get("/info/:id", async function (req, res) {
         console.log(error)
     }
 })
+
+app.get("/new", async function (req, res) {
+    try {
+        let connection = await mongoClient.connect(URL)
+        let db = connection.db("moneymanager")
+        let e = await db.collection("mentorplist").find({}).toArray()
+        await connection.close()
+        res.json(e)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
 
 
 
