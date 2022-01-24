@@ -10,13 +10,13 @@ let options = { origin: "*" }
 app.use(cors(options))
 app.use(express.json())
 
-app.post("/mentor", async function(req,res){
+app.post("/plist", async function(req,res){
     try {
         let connection=await mongoClient.connect(URL)
         let db= connection.db("moneymanager")
-        let b = await db.collection("mentor42").insertMany(req.body)
+        let b = await db.collection("mentorplist").insertMany(req.body)
         await connection.close()
-        res.json({message:"mentor created"})
+        res.json({message:"posted"})
         
     } catch (error) {
        console.log(error) 
