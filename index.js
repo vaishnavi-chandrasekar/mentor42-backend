@@ -117,6 +117,37 @@ app.get("/new", async function (req, res) {
 })
 
 
+app.get("/Add/:id", async function (req, res) {
+    try {
+        let connection = await mongoClient.connect(URL)
+        let db = connection.db("moneymanager")
+        let objId = mongodb.ObjectId(req.params.id)
+        let a = await db.collection("mentorplist").findOne({ _id: objId })
+        await connection.close()
+        res.json(a)
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+app.put("/nameedit/:id",async function(req,res){
+    try {
+        let connection= await mongoClient.connect(URL)
+        let db= connection.db("moneymanager")
+        let objId= mongodb.ObjectId(req.params.id)
+        let a= await db.collection("mentorplist").findOneAndUpdate({_id:objId},{$set:req.body})
+        await connection.close()
+        res.json({message:"data-updated"})
+    } catch (error) {
+        console.log(error)
+        
+    }
+})
+
+
+
+
 
 
 
