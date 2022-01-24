@@ -14,7 +14,7 @@ app.post("/mentor", async function(req,res){
     try {
         let connection=await mongoClient.connect(URL)
         let db= connection.db("moneymanager")
-        let b = await db.collection("mentor42").insertOne(req.body)
+        let b = await db.collection("mentor42").insertMany(req.body)
         await connection.close()
         res.json({message:"mentor created"})
         
